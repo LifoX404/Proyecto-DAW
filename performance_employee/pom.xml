@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>pruebaAPI</groupId>
-	<artifactId>Desempenno</artifactId>
+	<artifactId>api-cibertec-performance-employee</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Desempenno</name>
 	<description>Demo desempeño Empleado</description>
