@@ -1,0 +1,39 @@
+package api.cibertec.employee.performance.model;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.math.BigDecimal;
+
+@Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Table(name="employee_kpi")
+public class Empl_Kpi {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idEmployeeKpi;
+
+    @ManyToOne
+    @JoinColumn(name = "idEmployee")
+    private EmployeeTest employee;
+
+    @ManyToOne
+    @JoinColumn(name="idkpi")
+    private Kpi kpi;
+
+    @Column(nullable = false)
+    private String recordedDate;
+
+    @Column(precision = 10, scale = 2,nullable = false)
+    private BigDecimal statusEmployeeKpi;
+
+
+
+
+
+}
