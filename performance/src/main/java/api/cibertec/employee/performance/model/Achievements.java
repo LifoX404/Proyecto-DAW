@@ -29,7 +29,7 @@ public class Achievements {
     @Column(nullable = false)
     private String description;
 
-    @Column(columnDefinition = "TINYINT(1) DEFAULT 1")
+    @Column(columnDefinition = "BOOLEAN DEFAULT TRUE")
     private Boolean statusAchievement;
 
 }

@@ -16,4 +16,6 @@ public interface IKpiDAO {
 
     public void eliminadoLogico(Long id);
 
+    public List<Kpi> listKpi();
+
 }

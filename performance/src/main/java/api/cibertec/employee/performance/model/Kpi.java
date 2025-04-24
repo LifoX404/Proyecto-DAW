@@ -33,7 +33,7 @@ public class Kpi {
     @Column(name = "unitValue", precision = 10, scale = 2, nullable = false)
     private BigDecimal unitValue;
 
-    @Column(name = "statusKpi", nullable = false, columnDefinition = "TINYINT(1) DEFAULT 1")
-    private int statusKpi;
+    @Column(name = "statusKpi", nullable = false, columnDefinition = "BOOLEAN DEFAULT TRUE")
+    private Boolean statusKpi;
 
 }

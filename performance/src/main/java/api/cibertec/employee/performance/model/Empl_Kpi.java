@@ -29,8 +29,8 @@ public class Empl_Kpi {
     @Column(nullable = false)
     private String recordedDate;
 
-    @Column(precision = 10, scale = 2,nullable = false)
-    private BigDecimal statusEmployeeKpi;
+    @Column(name = "statusEmployeeKpi", nullable = false ,columnDefinition = "BOOLEAN DEFAULT TRUE")
+    private Boolean statusEmployeeKpi;
 
 
 

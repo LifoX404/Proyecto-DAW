@@ -35,4 +35,9 @@ public class KpiDAOImpl implements IKpiDAO {
     public void eliminadoLogico(Long id) {
         repository.eliminadoLogico(id);
     }
+
+    @Override
+    public List<Kpi> listKpi() {
+        return repository.listKpi();
+    }
 }

@@ -26,5 +26,5 @@ public class KpiDTO
 
     private BigDecimal unitValue;
 
-    private int statusKpi;
+    private Boolean statusKpi;
 }

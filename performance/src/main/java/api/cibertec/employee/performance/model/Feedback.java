@@ -20,18 +20,21 @@ public class Feedback {
     @JoinColumn(name = "idEmployee", nullable = false)
     private EmployeeTest employee;
 
-    @Column(name = "feedbackDate", nullable = false)
-    private String feedbackDate;
+    @Column(name = "date", nullable = false)
+    private String date;
 
     @ManyToOne
     @JoinColumn(name = "feedbackBy", nullable = false)
-    private EmployeeTest feedbackGiver;
+    private EmployeeTest feedbackBy;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "feedbackType", nullable = false, columnDefinition = "VARCHAR(50) DEFAULT 'NO_ESPECIFICADA'")
-    private FeedbackType feedbackType;
+    @Column(name = "type", nullable = false, columnDefinition = "VARCHAR(50) DEFAULT 'NO_ESPECIFICADA'")
+    private FeedbackType type;
 
-    @Column(name = "feedbackContent", columnDefinition = "TEXT")
-    private String feedbackContent;
+    @Column(name = "content", columnDefinition = "TEXT")
+    private String content;
+
+    @Column(name = "statusFeedback",columnDefinition = "BOOLEAN DEFAULT TRUE")
+    private boolean statusFeedback;
 
 }

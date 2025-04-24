@@ -40,4 +40,9 @@ public class AchievementsDAOImpl implements IAchievementsDAO {
     public List<Achievements> findByEmployeeId(Long id) {
         return repository.findAchievementsByEmployeeId(id);
     }
+
+    @Override
+    public List<Achievements> listAchievements() {
+        return repository.findAchievements();
+    }
 }

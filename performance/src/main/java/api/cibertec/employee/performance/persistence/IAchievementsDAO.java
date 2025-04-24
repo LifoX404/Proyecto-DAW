@@ -16,4 +16,6 @@ public interface IAchievementsDAO {
     public void eliminadoLogico(Long id);
 
     public List<Achievements> findByEmployeeId(Long id);
+
+    public List<Achievements> listAchievements();
 }

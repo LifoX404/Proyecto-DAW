@@ -20,4 +20,7 @@ public interface Achievements_Repository extends JpaRepository<Achievements, Lon
     @Transactional
     @Query("UPDATE Achievements a SET a.statusAchievement=false WHERE a.idAchievements= :id")
     void eliminadoLogico(@Param("id") Long id);
+
+    @Query("SELECT a FROM Achievements a WHERE a.statusAchievement= TRUE")
+    List<Achievements> findAchievements();
 }

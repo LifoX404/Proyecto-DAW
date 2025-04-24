@@ -39,4 +39,9 @@ public class AchievementsServiceImpl implements IAchievementsService {
     public List<Achievements> findByEmployeeId(Long id) {
         return achievementsDAO.findByEmployeeId(id);
     }
+
+    @Override
+    public List<Achievements> listAchievements() {
+        return achievementsDAO.listAchievements();
+    }
 }

@@ -15,4 +15,6 @@ public interface IKpiService {
 
     public void eliminadoLogico(Long id);
 
+    public List<Kpi> listKpi();
+
 }
