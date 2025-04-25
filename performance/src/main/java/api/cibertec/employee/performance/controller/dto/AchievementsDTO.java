@@ -1,6 +1,6 @@
 package api.cibertec.employee.performance.controller.dto;
 
-import api.cibertec.employee.performance.model.EmployeeTest;
+import api.cibertec.employee.performance.model.Employee;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,11 +10,12 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
- class AchievementsDTO {
+
+public class AchievementsDTO {
 
     private Long idAchievements;
 
-    private EmployeeTest idEmployee;
+    private Employee idEmployee;
 
     private String achievementDate;
 

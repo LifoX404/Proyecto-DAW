@@ -44,9 +44,9 @@ public class KpiController {
         return ResponseEntity.notFound().build();
     }
 
-    @GetMapping("/active")
+    @GetMapping("/list")
     public ResponseEntity<List<KpiDTO>> listActiveKpi() {
-        List<Kpi> activeKpi = kpiService.listKpi();
+        List<Kpi> activeKpi = kpiService.findKpiActive();
 
         if (activeKpi.isEmpty()) {
             return ResponseEntity.noContent().build();

@@ -16,8 +16,8 @@ public interface Kpi_Repository extends JpaRepository<Kpi, Long> {
     @Modifying
     @Transactional
     @Query("UPDATE Kpi k SET k.statusKpi = FALSE WHERE k.idKpi= :id")
-    void eliminadoLogico(@Param("id") Long id);
+    void logicDelete(@Param("id") Long id);
 
     @Query("SELECT k FROM Kpi k WHERE k.statusKpi = TRUE ")
-    List<Kpi> listKpi();
+    List<Kpi> findKpiActive();
 }

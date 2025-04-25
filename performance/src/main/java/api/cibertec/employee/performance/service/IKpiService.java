@@ -13,8 +13,8 @@ public interface IKpiService {
 
     public void save(Kpi kpi);
 
-    public void eliminadoLogico(Long id);
+    public void logicDelete(Long id);
 
-    public List<Kpi> listKpi();
+    public List<Kpi> findKpiActive();
 
 }

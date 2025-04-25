@@ -33,12 +33,14 @@ public class KpiServiceImpl  implements IKpiService {
     }
 
     @Override
-    public void eliminadoLogico(Long id) {
-        kpiDAO.eliminadoLogico(id);
+    public void logicDelete(Long id) {
+        kpiDAO.logicDelete(id);
     }
 
     @Override
-    public List<Kpi> listKpi() {
-        return kpiDAO.listKpi();
+    public List<Kpi> findKpiActive() {
+        return kpiDAO.findKpiActive();
     }
+
+
 }

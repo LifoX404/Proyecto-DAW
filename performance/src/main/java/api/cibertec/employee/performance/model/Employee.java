@@ -1,10 +1,16 @@
-package pruebaAPI.Desempenno.model;
+package api.cibertec.employee.performance.model;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
-@Table(name="Employee")
-public class EmployeeTest {
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Table(name = "employee")
+public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

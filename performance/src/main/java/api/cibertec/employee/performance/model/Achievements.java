@@ -16,9 +16,9 @@ public class Achievements {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idAchievements;
 
-    @ManyToOne
-    @JoinColumn(name = "idEmployee", nullable=false)
-    private EmployeeTest idEmployee;
+    //@ManyToOne
+    //@JoinColumn(name = "idEmployee", nullable=false)
+    private Long idEmployee;
 
     @Column(nullable = false)
     private String achievementDate;

@@ -32,12 +32,13 @@ public class KpiDAOImpl implements IKpiDAO {
     }
 
     @Override
-    public void eliminadoLogico(Long id) {
-        repository.eliminadoLogico(id);
+    public void logicDelete(Long id) {
+        repository.logicDelete(id);
     }
 
     @Override
-    public List<Kpi> listKpi() {
-        return repository.listKpi();
+    public List<Kpi> findKpiActive() {
+        return repository.findKpiActive();
     }
+
 }

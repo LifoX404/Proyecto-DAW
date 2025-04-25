@@ -31,17 +31,19 @@ public class AchievementsServiceImpl implements IAchievementsService {
     }
 
     @Override
-    public void eliminadoLogico(Long id) {
-        achievementsDAO.eliminadoLogico(id);
+    public void logicDelete(Long id) {
+        achievementsDAO.logicDelete(id);
     }
 
     @Override
-    public List<Achievements> findByEmployeeId(Long id) {
-        return achievementsDAO.findByEmployeeId(id);
+    public List<Achievements> findAchievementsByEmployeeId(Long id) {
+        return achievementsDAO.findAchievementsByEmployeeId(id);
     }
 
     @Override
-    public List<Achievements> listAchievements() {
-        return achievementsDAO.listAchievements();
+    public List<Achievements> findAchievementsActive() {
+        return achievementsDAO.findAchievementsActive();
     }
+
+
 }

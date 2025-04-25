@@ -3,7 +3,7 @@ package api.cibertec.employee.performance.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.math.BigDecimal;
+
 
 @Entity
 @Getter
@@ -20,7 +20,7 @@ public class Empl_Kpi {
 
     @ManyToOne
     @JoinColumn(name = "idEmployee")
-    private EmployeeTest employee;
+    private Employee employee;
 
     @ManyToOne
     @JoinColumn(name="idkpi")

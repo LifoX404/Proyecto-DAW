@@ -18,14 +18,14 @@ public class Feedback {
 
     @ManyToOne
     @JoinColumn(name = "idEmployee", nullable = false)
-    private EmployeeTest employee;
+    private Employee employee;
 
     @Column(name = "date", nullable = false)
     private String date;
 
     @ManyToOne
     @JoinColumn(name = "feedbackBy", nullable = false)
-    private EmployeeTest feedbackBy;
+    private Employee feedbackBy;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "type", nullable = false, columnDefinition = "VARCHAR(50) DEFAULT 'NO_ESPECIFICADA'")

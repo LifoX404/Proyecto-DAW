@@ -2,7 +2,6 @@ package api.cibertec.employee.performance.persistence.Impl;
 
 import api.cibertec.employee.performance.model.Achievements;
 import api.cibertec.employee.performance.persistence.IAchievementsDAO;
-import api.cibertec.employee.performance.persistence.IKpiDAO;
 import api.cibertec.employee.performance.repository.Achievements_Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -32,17 +31,17 @@ public class AchievementsDAOImpl implements IAchievementsDAO {
     }
 
     @Override
-    public void eliminadoLogico(Long id) {
-        repository.eliminadoLogico(id);
+    public void logicDelete(Long id) {
+        repository.logicDelete(id);
     }
 
     @Override
-    public List<Achievements> findByEmployeeId(Long id) {
+    public List<Achievements> findAchievementsByEmployeeId(Long id) {
         return repository.findAchievementsByEmployeeId(id);
     }
 
     @Override
-    public List<Achievements> listAchievements() {
-        return repository.findAchievements();
+    public List<Achievements> findAchievementsActive() {
+        return repository.findAchievementsActive();
     }
 }
