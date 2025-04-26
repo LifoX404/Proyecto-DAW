@@ -19,8 +19,15 @@ public class EmployeeController {
 
     @GetMapping("/list")
     public ResponseEntity<List<EmployeeDTO>> getAllEmployees() {
-        return new ResponseEntity<>(employeeService.getAllEmployees(), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(employeeService.getAllEmployees(), HttpStatus.OK);
+        }
+        catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
+
+
 
 
 }

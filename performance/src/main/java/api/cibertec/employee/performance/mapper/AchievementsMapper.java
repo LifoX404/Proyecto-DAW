@@ -15,7 +15,19 @@ public class AchievementsMapper {
                 .category(achievements.getCategory())
                 .description(achievements.getDescription())
                 .statusAchievement(achievements.getStatusAchievement())
-                .idEmployee(EmployeeDTO != null ? EmployeeDTO.getI)
+                .idEmployee(achievements.getIdEmployee())
+                .build();
+
+    }
+
+    public Achievements toEntity(AchievementsDTO achievementsDTO){
+        return Achievements.builder()
+                .idAchievements(achievementsDTO.getIdAchievements())
+                .category(achievementsDTO.getCategory())
+                .description(achievementsDTO.getDescription())
+                .achievementDate(achievementsDTO.getAchievementDate())
+                .idEmployee(achievementsDTO.getIdEmployee())
+                .statusAchievement(achievementsDTO.getStatusAchievement())
                 .build();
 
     }

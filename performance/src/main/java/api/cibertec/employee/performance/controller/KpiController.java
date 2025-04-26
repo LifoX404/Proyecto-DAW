@@ -1,6 +1,7 @@
 package api.cibertec.employee.performance.controller;
 
 import api.cibertec.employee.performance.controller.dto.KpiDTO;
+import api.cibertec.employee.performance.mapper.KpiMapper;
 import api.cibertec.employee.performance.model.Kpi;
 import api.cibertec.employee.performance.service.IKpiService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,23 +22,15 @@ public class KpiController {
     @Autowired
     private IKpiService kpiService;
 
+    @Autowired
+    private KpiMapper kpiMapper;
+
     @GetMapping("/find/{id}")
     public ResponseEntity<?> findKpiById(@PathVariable long id) {
         Optional<Kpi> kpiOptional = kpiService.findById(id);
 
         if (kpiOptional.isPresent()) {
-            Kpi kpi = kpiOptional.get();
-
-            KpiDTO kpiDTO = KpiDTO.builder()
-                    .idKpi(kpi.getIdKpi())
-                    .name(kpi.getName())
-                    .description(kpi.getDescription())
-                    .category(kpi.getCategory())
-                    .unit(kpi.getUnit())
-                    .unitValue(kpi.getUnitValue())
-                    .statusKpi(kpi.getStatusKpi())
-                    .build();
-
+            KpiDTO kpiDTO = kpiMapper.toDTO(kpiOptional.get());
             return ResponseEntity.ok(kpiDTO);
         }
 
@@ -52,59 +45,40 @@ public class KpiController {
             return ResponseEntity.noContent().build();
         }
 
-        List<KpiDTO> kpiDtos = activeKpi.stream()
-                .map(kpi -> KpiDTO.builder()
-                        .idKpi(kpi.getIdKpi())
-                        .name(kpi.getName())
-                        .description(kpi.getDescription())
-                        .category(kpi.getCategory())
-                        .unit(kpi.getUnit())
-                        .unitValue(kpi.getUnitValue())
-                        .statusKpi(kpi.getStatusKpi())
-                        .build())
-                .collect(Collectors.toList());
+        List<KpiDTO> kpiDTO_active = activeKpi.stream()
+                .map(kpiMapper::toDTO).
+                collect(Collectors.toList());
 
-
-
-        return ResponseEntity.ok(kpiDtos);
+        return ResponseEntity.ok(kpiDTO_active);
     }
 
     @GetMapping("/findAll")
     public ResponseEntity<?> findAll() {
 
-        List<KpiDTO> KpiList = kpiService.findAll()
-                .stream()
-                .map(kpi -> KpiDTO.builder()
-                        .idKpi(kpi.getIdKpi())
-                        .name(kpi.getName())
-                        .description(kpi.getDescription())
-                        .category(kpi.getCategory())
-                        .unit(kpi.getUnit())
-                        .unitValue(kpi.getUnitValue())
-                        .statusKpi(kpi.getStatusKpi())
-                        .build())
+        List<Kpi> kpis = kpiService.findAll();
+
+        if (kpis.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        List<KpiDTO> kpiDTOs = kpis.stream()
+                .map(kpiMapper :: toDTO)
                 .collect(Collectors.toList());
 
-        return ResponseEntity.ok(KpiList);
+        return ResponseEntity.ok(kpiDTOs);
+
+
     }
 
     @PostMapping("/save")
     public ResponseEntity<?> save(@RequestBody KpiDTO kpiDTO){
 
-
-
         if(kpiDTO.getName().isBlank() || kpiDTO.getDescription().isBlank()) {
             return ResponseEntity.badRequest().build();
         }
 
-        kpiService.save(Kpi.builder()
-                .name(kpiDTO.getName())
-                .description(kpiDTO.getDescription())
-                .category(kpiDTO.getCategory())
-                .unit(kpiDTO.getUnit())
-                .unitValue(kpiDTO.getUnitValue())
-                .statusKpi(kpiDTO.getStatusKpi())
-                .build());
+        Kpi kpi = kpiMapper.toEntity(kpiDTO);
+        kpiService.save(kpi);
 
         try{
             return ResponseEntity.created(new URI("/api/kpi/save")).build();

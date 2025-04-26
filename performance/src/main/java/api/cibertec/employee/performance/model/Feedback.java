@@ -14,18 +14,18 @@ public class Feedback {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idAchievement;
+    private Long idFeedback;
 
-    @ManyToOne
-    @JoinColumn(name = "idEmployee", nullable = false)
-    private Employee employee;
+    //@ManyToOne
+    //@JoinColumn(name = "idEmployee", nullable = false)
+    private Long idEmployee;
 
     @Column(name = "date", nullable = false)
     private String date;
 
-    @ManyToOne
-    @JoinColumn(name = "feedbackBy", nullable = false)
-    private Employee feedbackBy;
+    //@ManyToOne
+    //@JoinColumn(name = "feedbackBy", nullable = false)
+    private Long feedbackBy;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "type", nullable = false, columnDefinition = "VARCHAR(50) DEFAULT 'NO_ESPECIFICADA'")
