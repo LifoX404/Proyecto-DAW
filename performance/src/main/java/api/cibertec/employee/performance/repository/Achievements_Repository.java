@@ -9,12 +9,15 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface Achievements_Repository extends JpaRepository<Achievements, Long> {
 
     @Query("SELECT a FROM Achievements a WHERE a.idEmployee = :id")
     List<Achievements> findAchievementsByEmployeeId(@Param("id") long id);
+
+
 
     @Modifying
     @Transactional

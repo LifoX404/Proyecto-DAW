@@ -1,6 +1,6 @@
 package api.cibertec.employee.performance.mapper;
 
-import api.cibertec.employee.performance.controller.dto.KpiDTO;
+import api.cibertec.employee.performance.dto.KpiDTO;
 import api.cibertec.employee.performance.model.Kpi;
 import org.springframework.stereotype.Component;
 

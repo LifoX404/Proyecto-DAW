@@ -1,11 +1,11 @@
 package api.cibertec.employee.performance.controller;
 
-import api.cibertec.employee.performance.controller.dto.KpiDTO;
+import api.cibertec.employee.performance.client.EmployeeFeignClient;
+import api.cibertec.employee.performance.dto.KpiDTO;
 import api.cibertec.employee.performance.mapper.KpiMapper;
 import api.cibertec.employee.performance.model.Kpi;
 import api.cibertec.employee.performance.service.IKpiService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,26 +16,32 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/kpi")
+@RequestMapping("/performance/kpi")
 public class KpiController {
 
     @Autowired
-    private IKpiService kpiService;
+    private final IKpiService kpiService;
 
     @Autowired
-    private KpiMapper kpiMapper;
+    private final KpiMapper kpiMapper;
 
-    @GetMapping("/find/{id}")
-    public ResponseEntity<?> findKpiById(@PathVariable long id) {
-        Optional<Kpi> kpiOptional = kpiService.findById(id);
-
-        if (kpiOptional.isPresent()) {
-            KpiDTO kpiDTO = kpiMapper.toDTO(kpiOptional.get());
-            return ResponseEntity.ok(kpiDTO);
-        }
-
-        return ResponseEntity.notFound().build();
+    public KpiController(IKpiService kpiService, KpiMapper kpiMapper) {
+        this.kpiService = kpiService;
+        this.kpiMapper = kpiMapper;
     }
+
+
+//    @GetMapping("/find/{id}")
+//    public ResponseEntity<?> findKpiById(@PathVariable long id) {
+//        Optional<Kpi> kpiOptional = kpiService.findById(id);
+//
+//        if (kpiOptional.isPresent()) {
+//            KpiDTO kpiDTO = kpiMapper.toDTO(kpiOptional.get());
+//            return ResponseEntity.ok(kpiDTO);
+//        }
+//
+//        return ResponseEntity.notFound().build();
+//    }
 
     @GetMapping("/list")
     public ResponseEntity<List<KpiDTO>> listActiveKpi() {

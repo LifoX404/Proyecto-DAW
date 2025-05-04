@@ -1,4 +1,4 @@
-package api.cibertec.employee.performance.controller.dto;
+package api.cibertec.employee.performance.dto;
 
 
 import lombok.AllArgsConstructor;
@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class AchievementsDTO {
 
     private Long idAchievements;

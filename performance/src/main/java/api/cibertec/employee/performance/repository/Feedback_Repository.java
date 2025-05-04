@@ -1,5 +1,6 @@
 package api.cibertec.employee.performance.repository;
 
+import api.cibertec.employee.performance.model.Achievements;
 import api.cibertec.employee.performance.model.Feedback;
 import api.cibertec.employee.performance.model.Kpi;
 import jakarta.transaction.Transactional;
@@ -14,11 +15,7 @@ import java.util.List;
 @Repository
 public interface Feedback_Repository extends JpaRepository<Feedback, Long> {
 
-    @Query("SELECT f FROM Feedback f WHERE f.statusFeedback = TRUE ")
-    List<Kpi> findFeedbackActive();
+    @Query("SELECT f FROM Feedback f WHERE f.idEmployee = :id")
+    List<Feedback> findFeedbackByEmployeeId(@Param("id")Long id);
 
-    @Modifying
-    @Transactional
-    @Query("UPDATE Feedback f SET f.statusFeedback = FALSE WHERE f.idFeedback= :id")
-    void logicDelete(@Param("id") Long id);
 }
