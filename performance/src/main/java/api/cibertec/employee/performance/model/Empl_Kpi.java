@@ -18,8 +18,6 @@ public class Empl_Kpi {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEmployeeKpi;
 
-    //@ManyToOne
-    //@JoinColumn(name = "idEmployee")
     private Long idEmployee;
 
     @ManyToOne

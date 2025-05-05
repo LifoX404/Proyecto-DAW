@@ -31,6 +31,9 @@ public class AchievementsController {
     @Autowired
     private EmployeeFeignClient employeeClient;
 
+    public AchievementsController(){
+    }
+
 //    @GetMapping("/testEmployees")
 //    public ResponseEntity<List<EmployeeDTO>> listarEmpleados(){
 //        List<EmployeeDTO> activeEmployees = employeeClient.listarEmployees();
@@ -94,21 +97,30 @@ public class AchievementsController {
 
     @PostMapping("/save")
     public ResponseEntity<?> save(@RequestBody AchievementsDTO achievementsDTO) {
-        if (achievementsDTO.getDescription().isBlank() ||
-                achievementsDTO.getCategory().isBlank() ||
+        if (achievementsDTO.getDescription() == null ||
+                achievementsDTO.getCategory() == null ||
                 achievementsDTO.getIdEmployee() == null) {
             return ResponseEntity.badRequest()
                     .body(Collections.singletonMap("error", "Todos los campos son obligatorios"));
         }
 
-        try {
-            EmployeeDTO employee = employeeClient.validateEmployee(achievementsDTO.getIdEmployee());
-            if (employee == null){
-                return ResponseEntity.badRequest()
-                        .body(Collections.singletonMap("error","El empleado no existe"));
-            }
+
+        System.out.println(achievementsDTO.getIdEmployee());
+
+        if (employeeClient == null) {
+            System.out.println("El cliente Feign no está inicializado.");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Collections.singletonMap("error", "El cliente no está configurado"));
         }
-        catch (Exception e) {
+
+        try {
+            boolean employee = employeeClient.validateEmployee(achievementsDTO.getIdEmployee());
+        System.out.println(employee);
+            if (!employee) {
+                return ResponseEntity.badRequest()
+                        .body(Collections.singletonMap("error", "El empleado no existe"));
+            }
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE)
                     .body(Collections.singletonMap("error", "No se pudo validar el empleado"));
         }
@@ -120,7 +132,7 @@ public class AchievementsController {
             return ResponseEntity.created(new URI("/api/achievements/save"))
                     .body(Collections.singletonMap("mensaje", "El logro se ha registrado exitosamente."));
         } catch (URISyntaxException e) {
-            System.out.println("Error : "+ e);
+            System.out.println("Error : " + e);
             return ResponseEntity.internalServerError()
                     .body(Collections.singletonMap("error", "Ocurrió un error al guardar el logro."));
 

@@ -12,16 +12,9 @@ import java.util.List;
 @FeignClient(name = "Employee-service", url = "http://localhost:8082")
 public interface EmployeeFeignClient {
 
-    @GetMapping("/api/employees/getEmployeeById/{employeeId}")
-    EmployeeDTO getEmployeeById(@PathVariable Long employeeId);
-
     @GetMapping("/api/employees/validateEmployee/{employeeId}")
-    EmployeeDTO validateEmployee(@PathVariable Long employeeId);
+    boolean validateEmployee(@PathVariable Long employeeId);
 
-
-    // Testing
-//    @GetMapping("/api/employees/getActiveEmployees")
-//    List<EmployeeDTO> listarEmployees();
 
 }
 

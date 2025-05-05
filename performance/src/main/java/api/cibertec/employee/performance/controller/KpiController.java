@@ -30,19 +30,6 @@ public class KpiController {
         this.kpiMapper = kpiMapper;
     }
 
-
-//    @GetMapping("/find/{id}")
-//    public ResponseEntity<?> findKpiById(@PathVariable long id) {
-//        Optional<Kpi> kpiOptional = kpiService.findById(id);
-//
-//        if (kpiOptional.isPresent()) {
-//            KpiDTO kpiDTO = kpiMapper.toDTO(kpiOptional.get());
-//            return ResponseEntity.ok(kpiDTO);
-//        }
-//
-//        return ResponseEntity.notFound().build();
-//    }
-
     @GetMapping("/list")
     public ResponseEntity<List<KpiDTO>> listActiveKpi() {
         List<Kpi> activeKpi = kpiService.findKpiActive();
@@ -78,6 +65,8 @@ public class KpiController {
 
     @PostMapping("/save")
     public ResponseEntity<?> save(@RequestBody KpiDTO kpiDTO){
+
+
 
         if(kpiDTO.getName().isBlank() || kpiDTO.getDescription().isBlank()) {
             return ResponseEntity.badRequest().build();

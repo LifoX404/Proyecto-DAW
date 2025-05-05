@@ -30,7 +30,7 @@ public class FeedbackController {
     @Autowired
     private EmployeeFeignClient employeeClient;
 
-    @GetMapping("/findAll")
+    @GetMapping({"/findAll","/list"})
     public ResponseEntity<List<FeedbackDTO>> listarFeedback() {
         List<Feedback> allFeedback = feedbackService.findAll();
 
@@ -53,8 +53,8 @@ public class FeedbackController {
         }
 
         try {
-            EmployeeDTO employee = employeeClient.validateEmployee(id);
-            if (employee == null){
+            boolean employee = employeeClient.validateEmployee(id);
+            if (!employee){
                 return ResponseEntity.badRequest()
                         .body(Collections.singletonMap("error","El empleado no existe"));
             }
@@ -82,23 +82,26 @@ public class FeedbackController {
                     .body(Collections.singletonMap("error", "Todos los campos son obligatorios"));
         }
 
+        System.out.println(feedbackDTO);
 
-        try {
-            EmployeeDTO employee = employeeClient.validateEmployee(feedbackDTO.getIdEmployee());
-            EmployeeDTO feedbackBy = employeeClient.validateEmployee(feedbackDTO.getFeedbackBy());
-            if (employee == null || feedbackBy == null){
+
+        try{
+            boolean employee = employeeClient.validateEmployee(feedbackDTO.getIdEmployee());
+            boolean feedbackBy = employeeClient.validateEmployee(feedbackDTO.getFeedbackBy());
+            System.out.println(employee);
+            if (!employee || !feedbackBy){
                 return ResponseEntity.badRequest()
-                        .body(Collections.singletonMap("error","Uno o dos de los empleados no existe"));
+                        .body(Collections.singletonMap("error","Uno o dos de los empleados no existen"));
             }
+        }catch (Exception e){
+            return ResponseEntity.internalServerError()
+                    .body(Collections.singletonMap("Error interno","Ha ocurrido una excepción inesperada"));
         }
-        catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE)
-                    .body(Collections.singletonMap("error", "No se pudo validar el empleado"));
-        }
+
 
         if (feedbackDTO.getIdEmployee().equals(feedbackDTO.getFeedbackBy())) {
             return ResponseEntity.badRequest()
-                    .body("No puedes asignar un feedback para el empleado del mismo empleado.");
+                    .body("Un empleado no puede recibir un feedback por el mismo empleado.");
         }
 
         Feedback feedback = feedbackMapper.toEntity(feedbackDTO);
@@ -107,7 +110,7 @@ public class FeedbackController {
         try {
 
             return ResponseEntity.created(new URI("/api/feedback/save"))
-                    .body(Collections.singletonMap("mensaje", "El logro se ha registrado exitosamente."));
+                    .body(Collections.singletonMap("mensaje", "Se ha registrado exitosamente."));
         }
         catch (URISyntaxException e) {
             System.out.println("Error : "+ e);
